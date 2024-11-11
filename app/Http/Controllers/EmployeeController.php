@@ -8,10 +8,22 @@ use Illuminate\Http\Request;
 class EmployeeController extends Controller
 {
     // Menampilkan daftar pegawai
-    public function index()
+    public function index(Request $request)
     {
-        $employees = Employee::all(); // Ambil semua data pegawai dari database
-        return view('employees.index', compact('employees')); // Tampilkan data pegawai di halaman index
+        $query = Employee::query();
+
+        if ($request->has('search')) {
+            $query->where(
+                'nama',
+                'like',
+                '%' . $request->search . '%'
+            )
+                ->orWhere('nip', 'like', '%' . $request->search . '%');
+        }
+
+        $employees = $query->get();
+
+        return view('employees.index', compact('employees'));
     }
 
     // Menampilkan halaman tambah pegawai
@@ -63,5 +75,11 @@ class EmployeeController extends Controller
     {
         $employee->delete();
         return redirect()->route('employees.index')->with('success', 'Data pegawai berhasil dihapus.');
+    }
+
+    public function print()
+    {
+        $employees = Employee::all();
+        return view('employees.print', compact('employees'));
     }
 }

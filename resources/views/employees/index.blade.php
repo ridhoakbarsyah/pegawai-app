@@ -3,10 +3,22 @@
 @section('content')
     <div class="container">
         <h2>Daftar Pegawai</h2>
+
+        <!-- Search Form -->
+        <form action="{{ route('employees.index') }}" method="GET" class="mb-3">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="Cari Pegawai..."
+                    value="{{ request('search') }}">
+                <button type="submit" class="btn btn-primary">Cari</button>
+            </div>
+        </form>
+
+        <!-- Button Cetak -->
+        <button onclick="printData()" class="btn btn-secondary mb-3">Cetak Data Pegawai</button>
         <a href="{{ route('employees.create') }}" class="btn btn-primary mb-3">Tambah Pegawai</a>
 
         <div class="table-responsive">
-            <table class="table table-bordered table-sm">
+            <table class="table table-bordered table-sm" id="employeeTable">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -65,6 +77,15 @@
     <script>
         function confirmDelete() {
             return confirm('Apakah Anda yakin ingin menghapus data pegawai ini?');
+        }
+
+        function printData() {
+            var printContents = document.getElementById('employeeTable').outerHTML;
+            var originalContents = document.body.innerHTML;
+
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
         }
     </script>
 @endsection

@@ -19,3 +19,5 @@ Route::middleware(['auth'])->group(function () {
 
 // Route untuk melihat daftar pegawai
 Route::resource('employees', EmployeeController::class);
+
+Route::get('/employees/print', [EmployeeController::class, 'print'])->name('employees.print');
