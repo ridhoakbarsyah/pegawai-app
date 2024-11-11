@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cetak Data Pegawai</title>
     <style>
-        /* Tambahkan style sederhana untuk cetak */
         body {
             font-family: Arial, sans-serif;
         }
@@ -63,6 +62,7 @@
                 <th>Unit Kerja</th>
                 <th>No. HP</th>
                 <th>NPWP</th>
+                <th class="no-print">Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -83,6 +83,15 @@
                     <td>{{ $employee->unit_kerja }}</td>
                     <td>{{ $employee->no_hp }}</td>
                     <td>{{ $employee->npwp }}</td>
+                    <td class="no-print">
+                        <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{{ route('employees.destroy', $employee->id) }}" method="POST"
+                            style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>

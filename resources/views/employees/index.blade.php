@@ -4,7 +4,6 @@
     <div class="container">
         <h2>Daftar Pegawai</h2>
 
-        <!-- Search Form -->
         <form action="{{ route('employees.index') }}" method="GET" class="mb-3">
             <div class="input-group">
                 <input type="text" name="search" class="form-control" placeholder="Cari Pegawai..."
@@ -13,7 +12,6 @@
             </div>
         </form>
 
-        <!-- Button Cetak -->
         <button onclick="printData()" class="btn btn-secondary mb-3">Cetak Data Pegawai</button>
         <a href="{{ route('employees.create') }}" class="btn btn-primary mb-3">Tambah Pegawai</a>
 

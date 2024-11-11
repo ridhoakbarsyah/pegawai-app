@@ -50,9 +50,7 @@
                             </option>
                         </select>
                     </div>
-
-                    <!-- Tambahkan form field lainnya di kolom kedua sesuai kebutuhan -->
-
+                    
                     <div class="form-group">
                         <label for="gol">Golongan</label>
                         <input type="text" class="form-control" id="gol" name="gol"
